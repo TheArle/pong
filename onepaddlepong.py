@@ -12,6 +12,7 @@ class MyGame(arcade.Window):
 
     def __init__(self, width, height,title):
         super().__init__(width, height,title)
+        self.set_mouse_visible(False)
         arcade.set_background_color(arcade.color.AMAZON)
         #self.paddles = None
         #self.ball = None
@@ -20,8 +21,8 @@ class MyGame(arcade.Window):
 
     def setup(self):
         # Set up your game here
-        self.player_paddle = arcade.Sprite('paddle.png',1)
-        self.ball = arcade.Sprite('ball.png')
+        self.player_paddle = arcade.Sprite('resources/paddle.png',1)
+        self.ball = arcade.Sprite('resources/ball.png')
         
         self.player_paddle.center_x = SCREEN_WIDTH -50
         self.player_paddle.center_y = 50
@@ -46,14 +47,25 @@ class MyGame(arcade.Window):
        # x=arcade.check_for_collision_with_list(self.player_paddle, self.ball)
          
     
-    def on_key_press(self, key, key_modifiers):
-        if key == arcade.key.UP:
-            self.player_paddle.center_y += 30
-        elif key == arcade.key.DOWN:
-            self.player_paddle.center_y += -30
+    # def on_key_press(self, key, key_modifiers):
+    #    if key == arcade.key.UP:
+    #        self.player_paddle.center_y += 30
+    #    elif key == arcade.key.DOWN:
+    #        self.player_paddle.center_y += -30
         
-    def on_key_release(self, key, key_modifiers):
-        pass
+    #def on_key_release(self, key, key_modifiers):
+     #   pass
+
+
+    def on_mouse_motion(self, x, y, dx, dy):
+        print(x,y,dx,dy)
+        if self.player_paddle.center_y > SCREEN_HEIGHT:
+            pass
+        else:
+            if dy < 0:
+                self.player_paddle.center_y += -10
+            if dy > 0:
+                self.player_paddle.center_y += 10
 
 
 def main():
